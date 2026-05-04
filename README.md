@@ -1,11 +1,22 @@
-# 任意官方文档，一键查 —— Tech Doc Query
+# 官方技术文档，一键查 —— Tech Doc Query
 
-> 一个 Claude Code skill，用 Playwright 浏览器自动访问和提取任何官方技术文档的内容。
-> WebFetch 打不开？iframe 嵌套？需要登录？Cloudflare 拦截？它全处理。
+> Claude Code 的 WebFetch 打不开大多数官方文档？
+> Playwright 能打开，但 AI 不知道该怎么操作，只能瞎摸索？
+>
+> **Tech Doc Query** 把 15+ 站点的实战经验沉淀为一套标准化流程——诊断、提取、回退、汇报，
+> 让 Claude Code 面对任何官方文档都像老手一样稳。
 
-## 一句话简介
+## 为什么有这个 Skill
 
-**Tech Doc Query** 让 Claude Code 能像真人一样打开浏览器、导航到官方文档页面、自动提取内容并总结给你——无论那个文档站点用什么技术栈。
+Claude Code 内置的 WebFetch 对官方文档站点几乎束手无策——认证墙、iframe 嵌套、
+JS 动态渲染、Cloudflare 拦截，随便一个就能让它哑火。
+
+接入了 Playwright MCP 之后，浏览器能打开了，但新问题来了：**AI 不知道怎么操作。**
+该用 browser_click 还是 browser_run_code_unsafe？iframe 里的内容怎么取？
+ref 为什么总是过期？每次都要从零踩坑，效率极低。
+
+于是有了这个 Skill——**把 15+ 个真实站点的诊断和提取经验固化为可执行的流程**，
+让 AI 不再瞎摸索，每次查询都按同一套经过验证的规则来。
 
 ## 能做什么
 
