@@ -4,16 +4,24 @@ description: >
   Queries official documentation sites via Playwright browser when
   WebFetch cannot access them. Use when the user references any official
   docs — API references, command syntax, usage guides, getting-started
-  overviews — or provides a URL to a docs portal. Triggers: "official
+  overviews — or provides any URL (even casually). Triggers: "official
   docs", "usage guide", "API reference", "官方文档", "官方教程",
   "怎么使用". Also use when WebFetch fails due to auth, iframe nesting,
-  or domain restrictions.
+  or domain restrictions. CRITICAL: any user message containing a URL
+  MUST trigger this skill first, before any other action.
 when_to_use: >
-  Keywords: "check the docs", "help page", "verify syntax", "API
+  URL triggers (highest priority — check BEFORE WebFetch):
+  User sends any URL in the message, especially with casual verbs:
+  "看看", "查看", "看一下", "打开", "打开看看", "帮我看看",
+  "这个", "查一下", "访问", "浏览", "look at", "check out",
+  "take a look", "open this", "view", "browse".
+
+  Keyword triggers:
+  "check the docs", "help page", "verify syntax", "API
   reference", "getting started", "usage guide", "summarize docs",
   "官方文档", "官方使用方式", "官方教程", "怎么使用", "帮助文档".
-  Also: user provides a documentation URL, or WebFetch returns
-  auth/domain safety error.
+
+  Also: WebFetch returns auth/domain safety error.
 allowed-tools: Bash(npx playwright *) WebFetch Read Grep
 ---
 
