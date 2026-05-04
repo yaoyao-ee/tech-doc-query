@@ -70,13 +70,20 @@ cp reference.md ~/.claude/skills/tech-doc-query/reference.md
 
 ### 自动触发
 
-只要你的请求包含以下关键词，skill 会自动激活：
+**URL 触发（最高优先级）** — 只要你的消息里有 URL，尤其是搭配这些口语动词：
+
+`看看` `查看` `看一下` `打开` `打开看看` `帮我看看` `这个` `查一下` `访问` `浏览`
+`look at` `check out` `take a look` `open this` `view` `browse`
+
+> 示例：`https://xxx 看看`、`查一下这个 https://xxx`、`帮我看看 https://xxx`
+
+**关键词触发：**
 
 **中文：** 官方文档、官方教程、官方使用方式、怎么使用、帮助文档、官方概述
 
 **英文：** check the docs、official documentation、help page、verify syntax、API reference、getting started、usage guide、summarize docs
 
-**其他触发条件：** 你贴了一个官方文档 URL、WebFetch 返回了 auth/domain 错误。
+**兜底触发：** WebFetch 返回了 auth/domain 错误时自动接管。
 
 ### 手动调用
 
