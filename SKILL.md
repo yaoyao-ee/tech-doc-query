@@ -27,10 +27,11 @@ due to authentication requirements, iframe nesting, or domain restrictions.
 - Playwright MCP registered in Claude Code: verify with `/mcp`
 - Browser channel installed: `npx playwright install chrome`
 - For authenticated sites: a saved browser session (see Step 1)
-- **Main-session only:** Playwright MCP tools (browser_navigate, snapshot,
-  etc.) are only available in the main conversation. Subagents dispatched
-  via Agent() do NOT have access to these tools. All browser interactions
-  must happen in the main session.
+- **Serial agents work; parallel agents don't.** Subagents dispatched via
+  Agent() CAN use Playwright MCP tools — but only one at a time. Multiple
+  parallel agents fight over the same browser tab, causing ERR_ABORTED
+  and corrupt results. Run agents sequentially and wait for each to finish
+  before dispatching the next. 6 sequential agent tasks were verified working.
 - **Multiple tabs are supported:** Use `browser_tabs new` to open additional
   tabs within the same browser instance. Use `browser_tabs select` to switch
   between them. Each tab maintains its own URL and page state. This allows
@@ -308,9 +309,10 @@ const chunks = await page.evaluate(() => {
 
 When the user needs to look up multiple topics across different pages:
 
-**All browser work stays in the main session.** Subagents lack Playwright MCP
-access. Process pages yourself, then optionally dispatch an agent with extracted
-text for summarization.
+**Dispatch agents sequentially, not in parallel.** Subagents CAN use
+Playwright MCP, but parallel agents fight over one browser tab.
+Run one agent at a time, wait for completion, then dispatch the next.
+6 sequential agent tasks were verified working.
 
 ```
 # Option A: Sequential with tabs ← recommended for 2-4 pages
